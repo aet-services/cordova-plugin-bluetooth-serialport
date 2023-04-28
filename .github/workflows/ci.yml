@@ -19,6 +19,15 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           node-version: 18
 
+      - name: Install dependencies
+        run: |
+          cat <<EOF > .npmrc
+          registry=https://registry.npmjs.org/
+          @aet-services:registry=https://npm.pkg.github.com/
+          //npm.pkg.github.com/:_authToken=${{secrets.NPM_PKG_GITHUB_AUTH_TOKEN}}
+          EOF
+          npm i
+
       - name: Publish to GitHub Packages
         run: npm publish
         env:
