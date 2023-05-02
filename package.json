@@ -18,12 +18,10 @@
     "registry": "https://npm.pkg.github.com"
   },
   "keywords": [
+    "ecosystem:cordova",
     "cordova",
     "bluetooth",
-    "serial",
-    "ble",
-    "arduino",
-    "ecosystem:cordova"
+    "serialport"
   ],
   "scripts": {
     "release": "npx bumpp"
