@@ -91,7 +91,8 @@ public class BluetoothSerial extends CordovaPlugin {
 
     // Android 31 request user to explicitly grant permission for bluetooth connect
     private static final String BLUETOOTH_CONNECT = Manifest.permission.BLUETOOTH_CONNECT;
-    private static final int CHECK_PERMISSIONS_BLUETOOTH_CONNECT_REQ_CODE = 3;
+    private static final int CHECK_PERMISSIONS_LIST_REQ_CODE = 3;
+    private static final int CHECK_PERMISSIONS_CONNECT_REQ_CODE = 4;
     
     private CordovaArgs permissionArgs;
     private CallbackContext permissionCallback;
@@ -112,32 +113,22 @@ public class BluetoothSerial extends CordovaPlugin {
         boolean validAction = true;
 
         if (action.equals(LIST)) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (cordova.hasPermission(BLUETOOTH_CONNECT)) {
-                    listBondedDevices(callbackContext);
-                } else {
-                    permissionCallback = callbackContext;
-                    cordova.requestPermission(this, CHECK_PERMISSIONS_BLUETOOTH_CONNECT_REQ_CODE, BLUETOOTH_CONNECT);
-                }
-            } else {
+            if (cordova.hasPermission(BLUETOOTH_CONNECT)) {
                 listBondedDevices(callbackContext);
+            } else {
+                permissionCallback = callbackContext;
+                cordova.requestPermission(this, CHECK_PERMISSIONS_LIST_REQ_CODE, BLUETOOTH_CONNECT);
             }
 
         } else if (action.equals(CONNECT)) {
             boolean secure = true;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (cordova.hasPermission(BLUETOOTH_CONNECT)) {
-                    connect(args, secure, callbackContext);
-                } else {
-                    permissionArgs = args;
-                    permissionCallback = callbackContext;
-                    cordova.requestPermission(this, CHECK_PERMISSIONS_BLUETOOTH_CONNECT_REQ_CODE, BLUETOOTH_CONNECT);
-                }
-            } else {
+            if (cordova.hasPermission(BLUETOOTH_CONNECT)) {
                 connect(args, secure, callbackContext);
+            } else {
+                permissionArgs = args;
+                permissionCallback = callbackContext;
+                cordova.requestPermission(this, CHECK_PERMISSIONS_CONNECT_REQ_CODE, BLUETOOTH_CONNECT);
             }
-
 
         } else if (action.equals(CONNECT_INSECURE)) {
 
@@ -512,7 +503,12 @@ public class BluetoothSerial extends CordovaPlugin {
                 discoverUnpairedDevices(permissionCallback);
                 break;
 
-            case CHECK_PERMISSIONS_BLUETOOTH_CONNECT_REQ_CODE:
+            case CHECK_PERMISSIONS_LIST_REQ_CODE:
+                LOG.d(TAG, "User granted bluetooth connect permission");
+                listBondedDevices(permissionCallback);
+                break;
+
+            case CHECK_PERMISSIONS_CONNECT_REQ_CODE:
                 LOG.d(TAG, "User granted bluetooth connect permission");
                 boolean secure = true;
                 connect(permissionArgs, secure, permissionCallback);
