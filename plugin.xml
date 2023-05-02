@@ -5,12 +5,12 @@
     id="@aet-services/cordova-plugin-bluetooth-serialport"
     version="0.4.8">
 
-    <name>Bluetooth Serial</name>
-    <description>Bluetooth Serial Communication Plugin</description>
+    <name>Bluetooth Serialport</name>
+    <description>Bluetooth Serialport Communication Plugin</description>
     <license>Apache 2.0</license>
-    <keywords>bluetooth, BLE, arduino</keywords>
-    <repo>https://github.com/don/BluetoothSerial.git</repo>
-    <issue>https://github.com/don/BluetoothSerial/issues</issue>
+    <keywords>bluetooth, serialport</keywords>
+    <repo>https://github.com/aet-services/cordova-plugin-bluetooth-serialport.git</repo>
+    <issue>https://github.com/aet-services/cordova-plugin-bluetooth-serialport/issues</issue>
 
     <js-module src="www/bluetoothSerial.js" name="bluetoothSerial">
         <clobbers target="window.bluetoothSerial" />
