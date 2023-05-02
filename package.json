@@ -1,6 +1,6 @@
 {
   "name": "@aet-services/cordova-plugin-bluetooth-serialport",
-  "version": "0.4.8-beta.1",
+  "version": "0.4.8-beta.2",
   "description": "Bluetooth Serial Communication Plugin",
   "main": "./www/bluetoothSerial.js",
   "cordova": {
