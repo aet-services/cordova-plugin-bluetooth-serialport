@@ -1,4 +1,4 @@
-package com.megster.cordova;
+package org.apache.cordova.bluetooth;
 
 import java.io.IOException;
 import java.io.InputStream;

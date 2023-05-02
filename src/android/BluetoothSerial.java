@@ -1,4 +1,4 @@
-package com.megster.cordova;
+package org.apache.cordova.bluetooth;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -70,7 +70,7 @@ public class BluetoothSerial extends CordovaPlugin {
     private static final boolean D = true;
 
     // Message types sent from the BluetoothSerialService Handler
-public static final int MESSAGE_STATE_CHANGE = 1;
+    public static final int MESSAGE_STATE_CHANGE = 1;
     public static final int MESSAGE_READ = 2;
     public static final int MESSAGE_WRITE = 3;
     public static final int MESSAGE_DEVICE_NAME = 4;

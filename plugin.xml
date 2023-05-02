@@ -6,9 +6,9 @@
     version="0.4.8">
 
     <name>Bluetooth Serialport</name>
-    <description>Bluetooth Serialport Communication Plugin</description>
+    <description>Bluetooth Serial Communication Plugin</description>
     <license>Apache 2.0</license>
-    <keywords>bluetooth, serialport</keywords>
+    <keywords>bluetooth, serial</keywords>
     <repo>https://github.com/aet-services/cordova-plugin-bluetooth-serialport.git</repo>
     <issue>https://github.com/aet-services/cordova-plugin-bluetooth-serialport/issues</issue>
 
@@ -20,14 +20,12 @@
 
         <config-file target="res/xml/config.xml" parent="/widget">
             <feature name="BluetoothSerial">
-                <param name="android-package" value="com.megster.cordova.BluetoothSerial"/>
+                <param name="android-package" value="org.apache.cordova.bluetooth.BluetoothSerial"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/com/megster/cordova/BluetoothSerial.java"
-            target-dir="src/com/megster/cordova"/>
-        <source-file src="src/android/com/megster/cordova/BluetoothSerialService.java"
-            target-dir="src/com/megster/cordova"/>
+        <source-file src="src/android/BluetoothSerial.java" target-dir="src/org/apache/cordova/bluetooth/bluetoothSerial"/>
+        <source-file src="src/android/BluetoothSerialService.java" target-dir="src/org/apache/cordova/bluetooth/bluetoothSerial"/>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
