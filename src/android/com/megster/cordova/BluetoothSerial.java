@@ -115,19 +115,12 @@ public class BluetoothSerial extends CordovaPlugin {
         if (action.equals(LIST)) {
             if (cordova.hasPermission(BLUETOOTH_CONNECT)) {
                 listBondedDevices(callbackContext);
-            } else {
-                permissionCallback = callbackContext;
-                cordova.requestPermission(this, CHECK_PERMISSIONS_LIST_REQ_CODE, BLUETOOTH_CONNECT);
             }
 
         } else if (action.equals(CONNECT)) {
             boolean secure = true;
             if (cordova.hasPermission(BLUETOOTH_CONNECT)) {
                 connect(args, secure, callbackContext);
-            } else {
-                permissionArgs = args;
-                permissionCallback = callbackContext;
-                cordova.requestPermission(this, CHECK_PERMISSIONS_CONNECT_REQ_CODE, BLUETOOTH_CONNECT);
             }
 
         } else if (action.equals(CONNECT_INSECURE)) {
@@ -224,9 +217,15 @@ public class BluetoothSerial extends CordovaPlugin {
 
         } else if (action.equals(ENABLE)) {
 
+            if (!cordova.hasPermission(BLUETOOTH_CONNECT)) {
+                permissionCallback = callbackContext;
+                cordova.requestPermission(this, 99, BLUETOOTH_CONNECT);
+            }
+
             enableBluetoothCallback = callbackContext;
             Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             cordova.startActivityForResult(this, intent, REQUEST_ENABLE_BLUETOOTH);
+
 
         } else if (action.equals(DISCOVER_UNPAIRED)) {
 
@@ -501,17 +500,6 @@ public class BluetoothSerial extends CordovaPlugin {
             case CHECK_PERMISSIONS_ACCESS_LOCATION_REQ_CODE:
                 LOG.d(TAG, "User granted location permission");
                 discoverUnpairedDevices(permissionCallback);
-                break;
-
-            case CHECK_PERMISSIONS_LIST_REQ_CODE:
-                LOG.d(TAG, "User granted bluetooth connect permission");
-                listBondedDevices(permissionCallback);
-                break;
-
-            case CHECK_PERMISSIONS_CONNECT_REQ_CODE:
-                LOG.d(TAG, "User granted bluetooth connect permission");
-                boolean secure = true;
-                connect(permissionArgs, secure, permissionCallback);
                 break;
         }
     }

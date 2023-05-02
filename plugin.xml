@@ -2,8 +2,8 @@
 <plugin
     xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-bluetooth-serialport"
-    version="0.4.7">
+    id="@aet-services/cordova-plugin-bluetooth-serialport"
+    version="0.4.8">
 
     <name>Bluetooth Serial</name>
     <description>Bluetooth Serial Communication Plugin</description>

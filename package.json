@@ -4,7 +4,7 @@
   "description": "Bluetooth Serial Communication Plugin",
   "main": "./www/bluetoothSerial.js",
   "cordova": {
-    "id": "cordova-plugin-bluetooth-serialport",
+    "id": "@aet-services/cordova-plugin-bluetooth-serialport",
     "platforms": [
       "android",
       "ios"
