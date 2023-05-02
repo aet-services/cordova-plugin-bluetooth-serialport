@@ -113,7 +113,16 @@ public class BluetoothSerial extends CordovaPlugin {
 
         if (action.equals(LIST)) {
 
-            listBondedDevices(callbackContext);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (cordova.hasPermission(BLUETOOTH_CONNECT)) {
+                    listBondedDevices(callbackContext);
+                } else {
+                    permissionCallback = callbackContext;
+                    cordova.requestPermission(this, CHECK_PERMISSIONS_BLUETOOTH_CONNECT_REQ_CODE, BLUETOOTH_CONNECT);
+                }
+            } else {
+                listBondedDevices(callbackContext);
+            }
 
         } else if (action.equals(CONNECT)) {
             boolean secure = true;
@@ -123,7 +132,7 @@ public class BluetoothSerial extends CordovaPlugin {
                 } else {
                     permissionArgs = args;
                     permissionCallback = callbackContext;
-                    cordova.requestPermission(this, CHECK_PERMISSIONS_ACCESS_LOCATION_REQ_CODE, BLUETOOTH_CONNECT);
+                    cordova.requestPermission(this, CHECK_PERMISSIONS_BLUETOOTH_CONNECT_REQ_CODE, BLUETOOTH_CONNECT);
                 }
             } else {
                 connect(args, secure, callbackContext);
