@@ -93,7 +93,7 @@ public class BluetoothSerial extends CordovaPlugin {
     private static final String BLUETOOTH_CONNECT = Manifest.permission.BLUETOOTH_CONNECT;
     private static final int CHECK_PERMISSIONS_BLUETOOTH_CONNECT_REQ_CODE = 3;
     
-    private CordovaArs permissionArgs;
+    private CordovaArgs permissionArgs;
     private CallbackContext permissionCallback;
 
     @Override
